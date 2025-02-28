@@ -32,7 +32,16 @@
 
                 <p><strong>Status:</strong> {{ $report->statusUnit->name ?? '-' }}</p>
                 <p><strong>Backlog/Outstanding:</strong> {{ $report->backlog_outstanding ?? '-' }}</p>
-                <p><strong>MP:</strong> {{ $report->manpower->name ?? '-' }}</p>
+                <p><strong>MP:</strong> 
+                    @if ($report->manpower && $report->manpower->count() > 0)
+                        @foreach ($report->manpower as $mp)
+                            {{ $mp->name }}{{ !$loop->last ? ', ' : '' }}
+                        @endforeach
+                    @else
+                        -
+                    @endif
+                </p>
+                
 
                 <hr>
 
@@ -53,7 +62,11 @@
                     @endforeach
                     <br>Status: {{ $report->statusUnit->name ?? '-' }}
                     <br>Backlog/Outstanding: {{ $report->backlog_outstanding ?? '-' }}
-                    <br>MP: {{ $report->manpower->name ?? '-' }}
+                    <br>MP: 
+                    @foreach ($report->manpower as $manpowers)
+                    {{ $manpowers->name }}{{ !$loop->last ? ', ' : '' }}
+                    @endforeach
+                    @if ($report->manpower->isEmpty()) - @endif
                 </div>
 
                 <!-- TOMBOL COPY -->
