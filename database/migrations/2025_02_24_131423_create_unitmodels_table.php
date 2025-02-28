@@ -14,12 +14,9 @@ return new class extends Migration
     {
         Schema::create('unitmodels', function (Blueprint $table) {
             $table->id(); // Kolom id (primary key)
-            $table->integer('brand_id'); // Kolom brand_id (foreign key)
+            $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->string('name'); // Kolom name
             $table->timestamps(); // Kolom created_at dan updated_at
-
-            // Definisikan foreign key
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
         });
     }
 

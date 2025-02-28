@@ -79,13 +79,19 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label for="manpower_id" class="form-label">Status Unit</label>
-                            <select id="manpower_id" name="manpower_id" class="form-select" required>
-                                <option value="">-- Select Manpower --</option>
+                            <label for="manpowers" class="form-label">Manpowers</label>
+                            <div class="border p-2 rounded" style="max-height: 200px; overflow-y: auto;">
                                 @foreach ($manpowers as $manpower)
-                                    <option value="{{ $manpower->id }}" {{ $report->manpower_id == $manpower->id ? 'selected' : '' }}>{{ $manpower->name }}</option>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="manpower_{{ $manpower->id }}" 
+                                               name="manpowers[]" value="{{ $manpower->id }}"
+                                               {{ in_array($manpower->id, ($report->manpower ?? collect([]))->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="manpower_{{ $manpower->id }}">
+                                            {{ $manpower->name }}
+                                        </label>
+                                    </div>
                                 @endforeach
-                            </select>
+                            </div>
                         </div>
                     </div>
                     

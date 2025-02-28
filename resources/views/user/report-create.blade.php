@@ -74,17 +74,15 @@
                             <input type="datetime-local" id="date_finish" name="date_finish" class="form-control">
                         </div>
 
-                        <div class="col-md-4">
-                            <label for="manpower_id" class="form-label">Status Unit</label>
-                            <select id="manpower_id" name="manpower_id" class="form-select" required>
-                                <option value="">-- Select Manpower --</option>
-                                @foreach ($manpowers as $manpower)
-                                    <option value="{{ $manpower->id }}">{{ $manpower->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class="col-md-4">
+                        <label for="manpowers" class="form-label">Select Manpowers</label>
+                        <select name="manpowers[]" id="manpowers" class="form-control select2" multiple="multiple">
+                            @foreach ($manpowers as $manpower)
+                                <option value="{{ $manpower->id }}">{{ $manpower->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-
+                    
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <label for="problem_desc" class="form-label">Problem Description</label>
@@ -176,6 +174,17 @@
                         componentSelect.innerHTML += `<option value="${component.id}">${component.name}</option>`;
                     });
                 });
+        });
+
+        // $(document).ready(function() {
+        //     $('.selectpicker').selectpicker();
+        // });
+
+        $(document).ready(function() {
+            $('#manpowers').select2({
+                placeholder: "Select Manpowers",
+                allowClear: true
+            });
         });
 
     </script>

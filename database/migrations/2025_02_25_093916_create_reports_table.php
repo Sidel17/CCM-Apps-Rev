@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
-            $table->integer('brand_id')->constrained('brands')->onDelete('cascade');
+            $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->foreignId('unitmodel_id')->constrained('unitmodels')->onDelete('cascade');
             $table->integer('hm');
             $table->foreignId('location_id')->constrained('locations')->onDelete('cascade');
@@ -22,7 +22,6 @@ return new class extends Migration {
             $table->foreignId('statusunit_id')->constrained('statusunit')->onDelete('cascade');
             $table->longText('activity_report');
             $table->longText('backlog_outstanding')->nullable();
-            $table->foreignId('manpower_id')->constrained('manpower')->onDelete('cascade');
             $table->timestamps();
         });
     }

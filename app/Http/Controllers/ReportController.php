@@ -29,6 +29,7 @@ class ReportController extends Controller
 
     public function create()
     {
+        $report = Report::with('manpowers');
         $units = Unit::all();
         $locations = Location::all();
         $groupComponents = GroupCompnent::all();
@@ -54,15 +55,19 @@ class ReportController extends Controller
             'statusunit_id' => 'required|exists:statusunit,id',
             'activity_report' => 'required|string',
             'backlog_outstanding' => 'nullable|string',
-            'manpower_id' => 'required|exists:manpower,id',
+            'manpowers' => 'required|array',
+            'manpowers.*' => 'exists:manpower,id',
         ]);
 
         try {
+            // Konversi format tanggal
             $validatedData['date_start'] = Carbon::parse($request->date_start)->format('Y-m-d H:i:s');
             $validatedData['date_finish'] = $request->date_finish ? Carbon::parse($request->date_finish)->format('Y-m-d H:i:s') : null;
-    
-            Report::create($validatedData);
-    
+
+            // Buat report tanpa manpower_id
+            $report = Report::create($validatedData);
+            $report->manpower()->sync($request->manpowers);
+
             return redirect()->route('reports.index')->with('success', 'Report created successfully.');
         } catch (\Exception $e) {
             Log::error('Error saving report: ' . $e->getMessage());
@@ -78,8 +83,8 @@ class ReportController extends Controller
 
     public function edit($id)
     {
-        // $report = Report::with('manpowers')->findOrFail($id);
-        $report = Report::findOrFail($id); // Ambil data report berdasarkan ID
+        $report = Report::with('manpower')->findOrFail($id);
+        // $report = Report::findOrFail($id); // Ambil data report berdasarkan ID
         $units = Unit::all();
         $locations = Location::all();
         $groupComponents = GroupCompnent::all();
@@ -107,7 +112,8 @@ class ReportController extends Controller
             'statusunit_id' => 'required|exists:statusunit,id',
             'activity_report' => 'required|string',
             'backlog_outstanding' => 'nullable|string',
-            'manpower_id' => 'required|exists:manpower,id',
+            'manpowers' => 'required|array',
+            'manpowers.*' => 'exists:manpower,id',
         ]);
 
         try {
@@ -115,6 +121,8 @@ class ReportController extends Controller
             $validatedData['date_finish'] = $request->date_finish ? Carbon::parse($request->date_finish)->format('Y-m-d H:i:s') : null;
     
             $report->update($validatedData);
+
+            $report->manpower()->sync($request->input('manpowers', []));
     
             return redirect()->route('reports.index')->with('success', 'Report updated successfully.');
         } catch (\Exception $e) {
