@@ -13,14 +13,50 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <style>
+            .bg-gradient {
+                background: linear-gradient(135deg, #2921a8, #004ae8, #ff6300, #ffd800);
+            }
+            .glass {
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+                border-radius: 15px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+            .glass a {
+                color: #004ae8;
+            }
+            .glass a:hover {
+                color: #ff6300;
+            }
+            .btn-primary {
+                background-color: #ff6300;
+                border-color: #ff6300;
+            }
+            .btn-primary:hover {
+                background-color: #ffd800;
+                border-color: #ffd800;
+            }
+            .input-label {
+                color: #2921a8;
+            }
+            .text-input {
+                border: 2px solid #004ae8;
+                border-radius: 8px;
+            }
+            .text-input:focus {
+                border-color: #ff6300;
+                box-shadow: 0 0 8px rgba(255, 99, 0, 0.5);
+            }
+        </style>
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gradient">
+            {{-- <div>
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    <x-application-logo/>
                 </a>
-            </div>
+            </div> --}}
 
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}

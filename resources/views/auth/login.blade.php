@@ -5,6 +5,12 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
+        <div>
+            <a href="/">
+                <x-application-logo/>
+            </a>
+        </div>
+
         <!-- Name -->
         <div class="mt-4">
             <x-input-label for="name" :value="__('Name')" />

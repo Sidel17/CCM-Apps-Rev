@@ -33,7 +33,7 @@ class Admin
         //User
         elseif($userRole == 2)
         {
-            return redirect()->route('dashboard');
+            return redirect()->route('user.report');
         }
     }
 }
