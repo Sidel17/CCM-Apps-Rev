@@ -76,7 +76,7 @@
 
                     <div class="col-md-4">
                         <label for="manpowers" class="form-label">Select Manpowers</label>
-                        <select name="manpowers[]" id="manpowers" class="form-control select2" multiple="multiple">
+                        <select name="manpowers[]" id="manpowers" class="form-control select2" multiple="multiple" required>
                             @foreach ($manpowers as $manpower)
                                 <option value="{{ $manpower->id }}">{{ $manpower->name }}</option>
                             @endforeach
