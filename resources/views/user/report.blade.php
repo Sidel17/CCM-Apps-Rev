@@ -29,6 +29,7 @@
                                     <th>Unit Model</th>
                                     <th>Location</th>
                                     <th>HM</th>
+                                    <th>Problem Breakdown</th>
                                     <th>Date Start</th>
                                     <th>Date Finish</th>
                                     <th>Actions</th>
@@ -42,6 +43,7 @@
                                         <td>{{ $report->unitModel->name }}</td>
                                         <td>{{ $report->location->name }}</td>
                                         <td>{{ $report->hm }}</td>
+                                        <td>{{ $report->problem_desc}}</td>
                                         <td>{{ $report->date_start }}</td>
                                         <td>{{ $report->date_finish ?? '-' }}</td>
                                         <td class="text-center">

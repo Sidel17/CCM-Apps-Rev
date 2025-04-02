@@ -42,7 +42,7 @@
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <label for="hm" class="form-label">HM</label>
-                            <input type="number" id="hm" name="hm" class="form-control" required>
+                            <input type="number" step="0.1" id="hm" name="hm" class="form-control" required>
                         </div>
                         <div class="col-md-4">
                             <label for="location_id" class="form-label">Location</label>

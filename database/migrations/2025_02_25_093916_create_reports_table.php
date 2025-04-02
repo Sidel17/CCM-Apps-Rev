@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
             $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->foreignId('unitmodel_id')->constrained('unitmodels')->onDelete('cascade');
-            $table->integer('hm');
+            $table->decimal('hm', 15, 1);
             $table->foreignId('location_id')->constrained('locations')->onDelete('cascade');
             $table->mediumText('problem_desc');
             $table->foreignId('groupcomponent_id')->constrained('groupcomponent')->onDelete('cascade');
