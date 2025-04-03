@@ -11,6 +11,8 @@ use App\Http\Controllers\StatusunitController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UnitModelsController;
+use App\Models\Report;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,6 +30,13 @@ Route::middleware(['auth', 'user'])->group(function()
     Route::resource('/user/reports', ReportController::class);
     Route::get('/user/report/{id}', [ReportController::class, 'show']);
 });
+
+Route::post('/update-order', function (Request $request) {
+    foreach ($request->order as $index => $item) {
+        Report::where('id', $item['id'])->update(['order' => $index + 1]);
+    }
+    return response()->json(['success' => true]);
+})->name('update.order');
 
 
 //Admin

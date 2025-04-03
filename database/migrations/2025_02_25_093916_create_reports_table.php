@@ -9,6 +9,7 @@ return new class extends Migration {
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
+            $table->integer('order')->default(0)->after('id');
             $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
             $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->foreignId('unitmodel_id')->constrained('unitmodels')->onDelete('cascade');

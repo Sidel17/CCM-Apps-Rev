@@ -24,6 +24,8 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
+        {{-- Alphine --}}
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x/dist/cdn.min.js" defer></script>
 
     </head>
     <body class="font-sans antialiased">
@@ -45,5 +47,9 @@
                 {{-- @yield('content') --}}
             </main>
         </div>
+
+        {{-- Livewire Sortable --}}
+        <livewire:scripts />
+        <script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v1.x.x/dist/livewire-sortable.js"></script>
     </body>
 </html>

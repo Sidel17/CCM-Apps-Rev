@@ -22,7 +22,7 @@ class ReportController extends Controller
     public function index()
     {
         $reports = Report::with(['unit', 'brand', 'unitModel', 'location', 'groupComponent', 'componentDetail', 'statusUnit', 'manpower'])
-        ->orderBy('created_at', 'desc')
+        ->orderBy('order', 'asc')
         ->get();
         return view('user.report', compact('reports'));
     }

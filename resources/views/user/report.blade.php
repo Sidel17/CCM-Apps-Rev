@@ -20,7 +20,8 @@
                             <i class="fas fa-plus"></i> Add Report
                         </a>
                     </div>
-                    <div class="table-responsive">
+
+                    <div class="table-responsive" x-data="dragDropTable()" x-init="initDragAndDrop">
                         <table class="table table-striped table-bordered">
                             <thead class="table-light">
                                 <tr class="text-center">
@@ -35,9 +36,15 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="sortable">
                                 @foreach ($reports as $report)
-                                    <tr>
+                                    <tr 
+                                        class="sortable-item"
+                                        data-id="{{ $report->id }}" 
+                                        draggable="true"
+                                        @dragstart="dragStart($event)"
+                                        @dragover.prevent
+                                        @drop="drop($event)">
                                         <td>{{ $report->unit->codeunit }}</td>
                                         <td>{{ $report->brand->name }}</td>
                                         <td>{{ $report->unitModel->name }}</td>
@@ -99,5 +106,54 @@
                 showConfirmButton: false
             });
         @endif
+    </script>
+
+    <script>
+        function dragDropTable() {
+            return {
+                initDragAndDrop() {
+                    let items = document.querySelectorAll(".sortable-item");
+                    items.forEach(item => {
+                        item.addEventListener("dragstart", this.dragStart);
+                        item.addEventListener("drop", this.drop);
+                        item.addEventListener("dragover", event => event.preventDefault());
+                    });
+                },
+                dragStart(event) {
+                    event.dataTransfer.setData("text/plain", event.target.getAttribute("data-id"));
+                },
+                drop(event) {
+                    event.preventDefault();
+                    let draggedId = event.dataTransfer.getData("text/plain");
+                    let dropTarget = event.target.closest("tr");
+
+                    if (!dropTarget) return;
+
+                    let parent = dropTarget.parentNode;
+                    let draggedElement = document.querySelector(`[data-id='${draggedId}']`);
+
+                    if (draggedElement !== dropTarget) {
+                        parent.insertBefore(draggedElement, dropTarget.nextSibling);
+                        this.updateOrder();
+                    }
+                },
+                updateOrder() {
+                    let order = [];
+                    document.querySelectorAll("#sortable tr").forEach((el, index) => {
+                        order.push({ id: el.getAttribute("data-id"), order: index + 1 });
+                    });
+
+                    fetch("{{ route('update.order') }}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        },
+                        body: JSON.stringify({ order })
+                    }).then(response => response.json())
+                    .then(data => console.log("Order updated:", data));
+                }
+            };
+        }
     </script>
 </x-app-layout>
