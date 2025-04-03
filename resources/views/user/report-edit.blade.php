@@ -41,11 +41,11 @@
                     </div>
                     
                     <div class="row mb-3">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="hm" class="form-label">HM</label>
                             <input type="number" id="hm" name="hm" class="form-control" value="{{ $report->hm }}" required>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="location_id" class="form-label">Location</label>
                             <select id="location_id" name="location_id" class="form-select" required>
                                 <option value="">-- Select Location --</option>
@@ -54,7 +54,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="statusunit_id" class="form-label">Status Unit</label>
                             <select id="statusunit_id" name="statusunit_id" class="form-select" required>
                                 <option value="">-- Select Status --</option>
@@ -62,6 +62,11 @@
                                     <option value="{{ $status->id }}" {{ $report->statusunit_id == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="breakdown_date" class="form-label">Breakdown Date Time</label>
+                            <input type="datetime-local" id="breakdown_date" name="breakdown_date" class="form-control" 
+                                   value="{{ \Carbon\Carbon::parse($report->breakdown_date)->format('Y-m-d\TH:i') }}" required>
                         </div>
                     </div>
                     

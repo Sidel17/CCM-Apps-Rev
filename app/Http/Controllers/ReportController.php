@@ -55,6 +55,7 @@ class ReportController extends Controller
             'statusunit_id' => 'required|exists:statusunit,id',
             'activity_report' => 'required|string',
             'backlog_outstanding' => 'nullable|string',
+            'breakdown_date' => 'required|date',
             'manpowers' => 'required|array',
             'manpowers.*' => 'exists:manpower,id',
         ]);
@@ -63,6 +64,7 @@ class ReportController extends Controller
             // Konversi format tanggal
             $validatedData['date_start'] = Carbon::parse($request->date_start)->format('Y-m-d H:i:s');
             $validatedData['date_finish'] = $request->date_finish ? Carbon::parse($request->date_finish)->format('Y-m-d H:i:s') : null;
+            $validatedData['breakdown_date'] = Carbon::parse($request->breakdown_date)->format('Y-m-d H:i:s');
 
             // Buat report tanpa manpower_id
             $report = Report::create($validatedData);
@@ -112,6 +114,7 @@ class ReportController extends Controller
             'statusunit_id' => 'required|exists:statusunit,id',
             'activity_report' => 'required|string',
             'backlog_outstanding' => 'nullable|string',
+            'breakdown_date' => 'required|date',
             'manpowers' => 'required|array',
             'manpowers.*' => 'exists:manpower,id',
         ]);
@@ -119,6 +122,7 @@ class ReportController extends Controller
         try {
             $validatedData['date_start'] = Carbon::parse($request->date_start)->format('Y-m-d H:i:s');
             $validatedData['date_finish'] = $request->date_finish ? Carbon::parse($request->date_finish)->format('Y-m-d H:i:s') : null;
+            $validatedData['breakdown_date'] = Carbon::parse($request->breakdown_date)->format('Y-m-d H:i:s');
     
             $report->update($validatedData);
 

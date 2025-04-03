@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->foreignId('componentdetail_id')->constrained('componentdetail')->onDelete('cascade');
             $table->timestamp('date_start');
             $table->timestamp('date_finish')->nullable();
+            $table->timestamp('breakdown_date');
             $table->foreignId('statusunit_id')->constrained('statusunit')->onDelete('cascade');
             $table->longText('activity_report');
             $table->longText('backlog_outstanding')->nullable();

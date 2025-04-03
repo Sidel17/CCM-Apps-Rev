@@ -13,7 +13,7 @@ class Report extends Model
         'unit_id', 'brand_id', 'unitmodel_id', 'hm', 'location_id',
         'problem_desc', 'groupcomponent_id', 'componentdetail_id',
         'date_start', 'date_finish', 'statusunit_id',
-        'activity_report', 'backlog_outstanding'
+        'activity_report', 'backlog_outstanding', 'breakdown_date'
     ];
 
     public function unit()
