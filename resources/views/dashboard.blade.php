@@ -5,11 +5,31 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+    <div class="py-4">
+        <div class="container">
+            <div class="card shadow-lg border-0 rounded-4 text-center">
+                <div class="card-body p-4">
+
+                    {{-- Status --}}
+                    <h5 class="fw-bold mb-3">
+                        {{ __("You're logged in!") }}
+                    </h5>
+                    <p class="text-muted mb-4">
+                        Target Bulanan SAP
+                    </p>
+
+                    {{-- Gambar (menggunakan komponen Blade) --}}
+                    <div class="d-flex justify-content-center mb-4">
+                        <x-target-bulanan-sap class="img-fluid rounded-3 shadow-sm" />
+                    </div>
+
+                    {{-- Tombol Link --}}
+                    <a href="https://linktr.ee/get_ccm_sebakis"
+                       target="_blank"
+                       class="btn btn-success btn-lg px-4 shadow">
+                        🌐 Kunjungi Linktree SAP nya yaaaa....... ^_^
+                    </a>
+
                 </div>
             </div>
         </div>
